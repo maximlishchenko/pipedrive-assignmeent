@@ -29,7 +29,7 @@ class DealController {
                     api_token: process.env.API_TOKEN,
                 },
             });
-            sendResponse(res, response.data, 200);
+            sendResponse(res, response.data, 201);
         } catch (error: unknown) {
             handleError(res, error as any);
         }
