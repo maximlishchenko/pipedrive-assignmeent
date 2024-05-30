@@ -14,7 +14,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16, 18]
+        node-version: [16, 18, 20]
 
     steps:
     - name: Checkout repository
@@ -29,9 +29,12 @@ jobs:
       run: npm install
 
     - name: Set environment variables
+      env:
+        API_TOKEN: ${{ secrets.API_TOKEN }}
+        PIPEDRIVE_API_URL: ${{ secrets.PIPEDRIVE_API_URL }}
       run: |
-        echo "API_TOKEN=0147119688c79f69230677cec3266b1b0050341f" >> $GITHUB_ENV
-        echo "PIPEDRIVE_API_URL=https://api.pipedrive.com/v1/" >> $GITHUB_ENV
+        echo "API_TOKEN=${{ secrets.API_TOKEN }}" >> $GITHUB_ENV
+        echo "PIPEDRIVE_API_URL=${{ secrets.PIPEDRIVE_API_URL }}" >> $GITHUB_ENV
 
     - name: Lint code
       run: npm run lint
