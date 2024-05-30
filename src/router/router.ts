@@ -8,6 +8,8 @@ router.get('/deals', dealController.getDeals);
 router.post('/deals', dealController.addDeal);
 router.put('/deals/:id', dealController.updateDeal);
 
+// get metrics endpoint
+// comment to delete
 router.get('/metrics', (req: Request, res: Response) => {
     res.status(200).json(metricsService.getMetrics());
 })
