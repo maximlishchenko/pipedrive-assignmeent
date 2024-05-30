@@ -1,11 +1,15 @@
-import { Router } from 'express';
-import DealController from '../controller/deal-controller';
+import { Router, Request, Response } from 'express';
+import { dealController } from '../controller/deal-controller';
+import { metricsService } from '../service/metrics-service';
 
 const router = Router();
-const dealController = new DealController();
 
 router.get('/deals', dealController.getDeals);
 router.post('/deals', dealController.addDeal);
 router.put('/deals/:id', dealController.updateDeal);
+
+router.get('/metrics', (req: Request, res: Response) => {
+    res.status(200).json(metricsService.getMetrics());
+})
 
 export default router;
