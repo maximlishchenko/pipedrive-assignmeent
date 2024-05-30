@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - master # includes the case when pull request is merged to master 
+      - main # includes the case when pull request is merged to main 
 
 jobs:
   deploy:
