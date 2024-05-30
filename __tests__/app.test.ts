@@ -114,9 +114,9 @@ describe("PUT /deals", () => {
             title: "newDealName",
             value: 1000
         };
-        // assuming deal with id 1234 doesn't exist
+        // assuming deal with id 12345 doesn't exist
         const response = await request(app)
-            .put('/api/deals/1234')
+            .put('/api/deals/12345')
             .send(updatedDealData);
 
         expect(response.statusCode).toBe(404);

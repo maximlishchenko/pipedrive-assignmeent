@@ -1,56 +1,38 @@
 import { Request, Response } from "express";
-import { apiRequest } from "../utils/api-request";
-import { sendResponse, handleError } from "../utils/response-handler";
+import { handleError } from "../utils/response-handler";
+import { dealService, DealService } from "../service/deal-service";
 
 class DealController {
 
-    async getDeals(req: Request, res: Response): Promise<void> {
+    private dealService: DealService = dealService;
+
+    getDeals = async (req: Request, res: Response): Promise<void> => {
         try {
-            const response = await apiRequest({
-                method: 'GET',
-                url: `${process.env.PIPEDRIVE_API_URL}/deals`,
-                params: {
-                    api_token: process.env.API_TOKEN,
-                },
-            });
-            sendResponse(res, response.data, 200);
+            const response = await this.dealService.getDeals();
+            res.status(200).json(response.data);
+        } catch (error: unknown) {
+            handleError(res, error as any);
+        }
+    };
+
+    addDeal = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const response = await this.dealService.addDeal(req.body);
+            res.status(201).json(response.data);
         } catch (error: unknown) {
             handleError(res, error as any);
         }
     }
 
-    async addDeal(req: Request, res: Response): Promise<void> {
-        try {
-            const response = await apiRequest({
-                method: 'POST',
-                url: `${process.env.PIPEDRIVE_API_URL}/deals`,
-                data: req.body,
-                params: {
-                    api_token: process.env.API_TOKEN,
-                },
-            });
-            sendResponse(res, response.data, 201);
-        } catch (error: unknown) {
-            handleError(res, error as any);
-        }
-    }
-
-    async updateDeal(req: Request, res: Response): Promise<void> {
+    updateDeal = async (req: Request, res: Response): Promise<void> => {
         try {
             const dealId = req.params.id;
-            const response = await apiRequest({
-                method: 'PUT',
-                url: `${process.env.PIPEDRIVE_API_URL}/deals/${dealId}`,
-                data: req.body,
-                params: {
-                    api_token: process.env.API_TOKEN,
-                },
-            });
-            sendResponse(res, response.data, 200);
+            const response = await this.dealService.updateDeal(dealId, req.body);
+            res.status(200).json(response.data);
         } catch (error: unknown) {
             handleError(res, error as any);
         }
     }
 }
 
-export default DealController;
+export const dealController = new DealController();
