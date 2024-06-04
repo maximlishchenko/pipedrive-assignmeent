@@ -44,7 +44,7 @@ export class DealService {
                 },
             });
             return updatedDeal;
-        } catch (error:unknown) {
+        } catch (error: unknown) {
             throw error;
         }
     }
