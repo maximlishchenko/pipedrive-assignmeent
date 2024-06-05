@@ -1,26 +1,33 @@
-# Pipedrive Home Challenge 2024
+# Pipedrive Home Challenge
 
 This project is a small Express.js application written in TypeScript with endpoints that
 interact with the Pipedrive public API.
 
-## Getting started
+## Running the project
 
 1. Download .zip or clone the project from GitHub.
 
 2. Navigate to the project root directory in the __terminal__.
 
-3. Ensure you have Docker installed on your device and the Docker engine is running.
+3. Create .env file with the following environment variables:
+    ```sh
+    PORT=3000
+    API_TOKEN=0147119688c79f69230677cec3266b1b0050341f
+    PIPEDRIVE_API_URL=https://api.pipedrive.com/v1/
+    ```
 
-## Running the project in development environment
+You can modify the api token in order to use another Pipedrive account.
 
-1. To build the image and start the container in development environment, execute
+4. Ensure you have Docker installed on your device and the Docker engine is running.
+
+5. To build the image and start the container in development environment, execute
     ```sh
     docker-compose -f docker-compose.dev.yml up
     ```
 
 The development environment is exposed on __PORT 3001__.
 
-2. To build the image and start the container in production environment, execute
+6. To build the image and start the container in production environment, execute
     ```sh
     docker-compose -f docker-compose.prod.yml up
     ```
@@ -29,62 +36,52 @@ The production environment is exposed on __PORT 3002__.
 
 ## How to use
 
-
-
 ### Endpoints
 
-  - Get account by ID  
+Note that in this setup the port will depend on whether you are accessing the development (3001) or production (3002) environment.
+
+  - Get all deals
 
   | Endpoint (GET) |
   | ------ |
-  | localhost:8080/accounts/{account_id} |  
+  | localhost:{PORT}/api/deals |  
    
-  - Create a new account
+  - Create a new deal
 
   | Endpoint (POST) |
   | ------ |
-  | localhost:8080/accounts |  
+  | localhost:{PORT}/api/deals |  
 
-   Example request body:
+    As per Pipedrive API, title (string) is required.
+
+    Example request body:
    ```sh
    {
-    "customer_id": 10,
-    "country": "Estonia", 
-    "currencies": ["EUR", "SEK", "USD", "GBP"]
+    "title": "myDeal123",
+    "value": "5000"
    }
    ```
-  - Create a new transaction
 
-  | Endpoint (POST) |
+  - Update a deal
+
+  | Endpoint (PUT) |
   | ------ |
-  | localhost:8080/accounts/{account_id}/transactions |  
+  | localhost:{PORT}/api/deals/{id} |  
 
+    Path parameter {id} is the ID of the deal to be modified
    Example request body:
    ```sh
    {
-     "amount": 100,
-     "currency": "EUR", 
-     "direction": "IN",
-     "description": "Salary"
+     "title": "newDealName"
    }
    ```
    
-  - Get all transactions by account id  
+### Running tests
 
-  | Endpoint (GET) |
-  | ------ |
-  | localhost:8080/accounts/{account_id}/transactions |  
-
-
-* RabbitMQ Management panel is located at http://localhost:15672/
-
-* PostgreSQL data
-
-  | ip | localhost:5432 |
-  | ------ | ------ |
-  | DB | tuum |
-  | user | sa |
-  | password | password |
+* Tests are written using Supertest and Jest. To run the tests for the endpoints, execute
+    ```sh
+   npm test
+   ```
   
 ## Important choises
 
