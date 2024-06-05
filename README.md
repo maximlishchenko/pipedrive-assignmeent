@@ -10,10 +10,11 @@ interact with the Pipedrive public API.
 2. Navigate to the project root directory in the __terminal__.
 
 3. Create .env file with the following environment variables:
-
-PORT=3000
-API_TOKEN=0147119688c79f69230677cec3266b1b0050341f
-PIPEDRIVE_API_URL=https://api.pipedrive.com/v1/
+    ```sh
+    PORT=3000
+    API_TOKEN=0147119688c79f69230677cec3266b1b0050341f
+    PIPEDRIVE_API_URL=https://api.pipedrive.com/v1/
+    ```
 
 You can modify the api token in order to use another Pipedrive account.
 
@@ -52,6 +53,7 @@ Note that in this setup the port will depend on whether you are accessing the de
   | localhost:{PORT}/api/deals |  
 
     As per Pipedrive API, title (string) is required.
+
     Example request body:
    ```sh
    {

@@ -19,7 +19,7 @@ describe("GET /deals", () => {
         const originalApiToken = process.env.API_TOKEN;
         process.env.API_TOKEN = '';
         const response = await request(app)
-        .get('/api/deals');
+            .get('/api/deals');
 
         expect(response.statusCode).toBe(401);
         expect(response.body.data?.success).toBe(false);
