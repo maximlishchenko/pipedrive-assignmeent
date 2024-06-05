@@ -1,0 +1,11 @@
+version: "3.7"
+services:
+ api-prod:
+  build:
+   context: .
+   target: production
+
+  ports:
+   - 3002:3000
+  env_file:
+   - .env

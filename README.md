@@ -52,9 +52,15 @@ Note that in this setup the port will depend on whether you are accessing the de
   | ------ |
   | localhost:{PORT}/api/deals |  
 
+<<<<<<< maximlishchenko-update-readme
 As per Pipedrive API, title (string) is required.
 
 Example request body:
+=======
+    As per Pipedrive API, title (string) is required.
+
+    Example request body:
+>>>>>>> feature-branch
    ```sh
    {
     "title": "myDeal123",
