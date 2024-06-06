@@ -1,12 +1,14 @@
 # Pipedrive Home Challenge
 
 This project is a small Express.js application written in TypeScript with endpoints that
-interact with the Pipedrive public API.
+interact with the Pipedrive public API. Additionally, the project is containerised with Docker.
 
 ## Running the project
 
-1. Download .zip or clone the project from GitHub.
-
+1. Clone the project from GitHub using
+   ```sh
+    git clone https://github.com/maximlishchenko/pipedrive-assignment.git
+    ```
 2. Navigate to the project root directory in the __terminal__.
 
 3. Create .env file with the following environment variables:
@@ -18,21 +20,21 @@ interact with the Pipedrive public API.
 
 You can modify the api token in order to use another Pipedrive account.
 
-4. Ensure you have Docker installed on your device and the Docker engine is running.
+4. Ensure you have Docker installed on your device and the Docker engine is running (Docker can be installed from https://docs.docker.com/engine/install/).
 
 5. To build the image and start the container in development environment, execute
     ```sh
     docker-compose -f docker-compose.dev.yml up
     ```
 
-The development environment is exposed on __PORT 3001__.
+The development environment is exposed on __PORT 3001__ by default.
 
 6. To build the image and start the container in production environment, execute
     ```sh
     docker-compose -f docker-compose.prod.yml up
     ```
 
-The production environment is exposed on __PORT 3002__.
+The production environment is exposed on __PORT 3002__ by default.
 
 ## How to use
 
@@ -114,6 +116,6 @@ Example request body:
 ### Part IV:
 * Similarly, I created a __cd.yml__ file that simply logs a "Deployed!" message on any push to the main branch, which also includes the case when a pull-request is merged to main.
 ### Part V:
-* I decided to write a Dockerfile that uses a multi-stage build to separate build and production environments. In the build stage, all dependencies from package.json are installed, and the build script is run. In the production stage, the devDependencies are ignored in order to minimise the size of the final image. Also, the built artifacts from the built stage are copied into /dist.
+* I decided to write a Dockerfile that uses a multi-stage build to separate build and production environments. In the build stage, all dependencies from package.json are installed, and the build script is run. In the production stage, the devDependencies are ignored in order to minimise the size of the final image. Also, the built artifacts from the build stage are copied into /dist.
 
   I created two docker compose files where each uses the appropriate stage from Dockerfile and runs on a different external port (3001 or 3002).
